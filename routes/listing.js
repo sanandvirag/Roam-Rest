@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { isLoggedIn, isOwner, validateListing} = require("../middleware.js");
 const listingController = require("../controllers/listing.js");
-
+const {storage} = require("../cloudConfig.js");
+const multer  = require('multer');
+const upload = multer({ storage });
 
 router
 .route("/")
@@ -12,6 +14,7 @@ router
 .post(
   isLoggedIn,
   validateListing,
+  upload.single('image[url]'),
   listingController.NewListingAddition
 );
 
@@ -28,6 +31,7 @@ router
 .put(
   isLoggedIn,
   isOwner,
+  upload.single('image[url]'),
   validateListing,
   listingController.EditListing
 )

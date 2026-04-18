@@ -11,7 +11,10 @@ const renderNewListingForm = (req, res) => {
 }
 
 const NewListingAddition =   wrapAsync(async (req, res) => {
+  const url = req.file.path;
+  const filename = req.file.filename
   const new_list = new Listings(req.body);
+  new_list.image = {url , filename};
   new_list.owner = req.user._id;
   await new_list.save();
   req.flash("success", "New Listing Added");
@@ -39,12 +42,26 @@ const renderEditPage =   wrapAsync(async (req, res) => {
     return res.redirect("/listings");
   }
 
-  res.render("edit.ejs", { edit_list: data, title: "edit info" });
+  let originalImageUrl = data.image.url;
+  originalImageUrl = originalImageUrl.replace("/upload" , "/upload/w_250"); 
+
+  res.render("edit.ejs", { edit_list: data, originalImageUrl, title: "Edit listing" });
 });
 
 const EditListing = wrapAsync(async (req, res) => {
   const { id } = req.params;
-  await Listings.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+  let listing = await Listings.findByIdAndUpdate(
+    id,
+    req.body,
+    { new: true, runValidators: true }
+  );
+  if (typeof req.file !== "undefined") {
+    listing.image = {
+      url: req.file.path,
+      filename: req.file.filename
+    };
+    await listing.save(); // save updated image
+  }
   req.flash("success", "Listing Updated");
   res.redirect(`/listings/${id}`);
 });
