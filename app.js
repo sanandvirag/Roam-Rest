@@ -87,12 +87,12 @@ app.use("/listings" , listingsRouter);
 app.use("/listings/:id/review" , reviewsRouter);
 app.use("/" , signupRouter);
 
-app.use((req, res) => {
-  res.status(404).send("Not Found");
-});
-
 app.get("/", (req, res) => {
   res.redirect("/listings");
+});
+
+app.use((req, res) => {
+  res.status(404).send("Not Found");
 });
 
 app.use((err, req, res, next)=>{
