@@ -46,7 +46,7 @@ const signupRouter = require("./routes/user.js");
 const store = MongoStore.create({
   mongoUrl:dburl,
   crypto:{
-    secret:"mysecretkey"
+    secret:process.env.SECRET
   },
   touchAfter:3600*24
 });
@@ -57,7 +57,7 @@ store.on("error", (err) => {
 
 const sessionOptions = {
   store,
-  secret:"mysecretkey",
+  secret:process.env.SECRET,
   resave:false,
   saveUninitialized:true,
   cookie:{
@@ -66,8 +66,6 @@ const sessionOptions = {
     httpOnly:true
   }
 };
-
-
 
 app.use(session(sessionOptions));
 app.use(flash());
