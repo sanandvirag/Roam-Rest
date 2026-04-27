@@ -2,6 +2,7 @@ body{
   display:flex;
   flex-direction: column;
   min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
 }
 .container{
   flex: 1;
@@ -11,10 +12,15 @@ body{
   height: 5rem;
 }
 .navbar-brand{
-  color: rgb(255, 56, 92);
+  color: rgb(255, 56, 92) !important;
 }
 .nav-link{
   color: black;
+}
+
+.nav-link:hover{
+  background-color: rgb(235, 233, 233);
+  border-radius: 10px;
 }
 
 .fa-regular{

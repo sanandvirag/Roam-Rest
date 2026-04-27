@@ -2,8 +2,8 @@
 <% block('styles').append(`<link rel="stylesheet" href="/info.css">`) %>
 
 <script>
-  const mapToken = "<%= process.env.MAP_TOKEN%>";
-  const coordinates = <%- JSON.stringify(info.geometry.coordinates)  %>;
+  const mapToken = "<%= process.env.MAP_TOKEN %>";
+  const coordinates = <%- JSON.stringify(info.geometry.coordinates) %>;
 </script>
 
 <div class="container py-5">

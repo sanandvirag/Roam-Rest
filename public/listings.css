@@ -17,12 +17,10 @@
   padding: 0px !important;
 }
 
-.price{
-  font-family: "Nunito", sans-serif;
+.price .tax{
   font-size: 14px !important;
   color: #222;
 }
 .title{
-  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: bold;
 }
